@@ -1,12 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, LogBox } from 'react-native';
 
-export default function App() {
+// screens
+import Header from "./Shared/Header";
+import ProductContainer from "./screens/Product/ProductContainer";
+
+LogBox.ignoreAllLogs(true); // not advisable to do - in production
+
+const App = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Header />
+      <ProductContainer />
     </View>
   );
 }
@@ -15,7 +21,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: 'center',
   },
 });
+
+export default App;

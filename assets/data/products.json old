@@ -1,0 +1,74 @@
+[
+    {
+        "_id": {
+            "$oid": "616dcdee8d09430ba81acee9"
+        },
+        "name":"Nivea New Refresh",
+        "description":"Nivea roll on dexcription",
+        "image":"https://images-us.nivea.com/-/media/media-center-items/f/7/8/275882-original.png",
+        "brand":"Nivea",
+        "price":15,
+        "category":{
+            "$oid":"616dcdb68d09430ba81acee6"
+        },
+        "countInStock":154,
+        "rating":3.5,
+        "numReviews":76,
+        "isFeatured":false,
+        "__v":0
+    },
+    {
+        "_id":{
+           "$oid":"61706f27d3a24f761bf3dd2b"
+        },
+        "name":"Boss Ernegy",
+        "description":"Boss Ernegy description",
+        "image":"https://cdn.pixabay.com/photo/2021/08/20/18/00/shaving-6560988_960_720.jpg",
+        "brand":"Boss Ernegy drinl brand",
+        "price":2.5,
+        "category":{
+           "$oid":"616ddbae2177ca9f170d6478"
+        },
+        "countInStock":100,
+        "rating":2.3,
+        "numReviews":10,
+        "isFeatured":true,
+        "__v":0
+    },
+    {
+        "_id":{
+           "$oid":"61706f27d3a24f761bf3dd4b"
+        },
+        "name":"Attitude is Everything",
+        "description":"Your attitude means a lot",
+        "image":"https://cdn.pixabay.com/photo/2021/08/20/18/00/shaving-6560988_960_720.jpg",
+        "brand":"Atittusde ",
+        "price":2.5,
+        "category":{
+           "$oid":"616ddbae2177ca9f170d6499"
+        },
+        "countInStock":100,
+        "rating":2.3,
+        "numReviews":10,
+        "isFeatured":true,
+        "__v":0
+    },
+    {
+        "_id":{
+           "$oid":"617sdjh7d3a24f761bf3dd2b"
+        },
+        "name":"Rig Ernegy",
+        "description":"Rig Ernegy description",
+        "image":"https://cdn.pixabay.com/photo/2021/08/20/18/00/shaving-6560988_960_720.jpg",
+        "brand":"RIg Ernegy drinl brand",
+        "price":2.5,
+        "category":{
+           "$oid":"616ddb78daasca9f170d6478"
+        },
+        "countInStock":100,
+        "rating":2.3,
+        "numReviews":10,
+        "isFeatured":true,
+        "__v":0
+    }
+]
