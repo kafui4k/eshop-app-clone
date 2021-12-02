@@ -6,6 +6,9 @@ import Icon from "react-native-vector-icons/FontAwesome";
 // STacks
 import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
+import UserNavigator from "./UserNavigator";
+
+
 import CartIcon from "../Shared/CartIcon";
 
 const Tab = createBottomTabNavigator();
@@ -65,7 +68,7 @@ const Main = () => {
             />
             <Tab.Screen
                 name="User"
-                component={CartNavigator}
+                component={UserNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Icon

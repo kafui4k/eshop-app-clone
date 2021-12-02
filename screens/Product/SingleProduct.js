@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, View, StyleSheet, Text, ScrollView, Button } from "react-native";
 import { Left, Right, Container, H1 } from "native-base";
+import Toast from "react-native-toast-message";
 
 const SingleProduct = (props) => {
 
@@ -36,7 +37,14 @@ const SingleProduct = (props) => {
                     <Text style={styles.price}>${item.price}</Text>
                 </Left>
                 <Right>
-                    <Button title="Add" />
+                    <Button title="Add" onPress={() => {props.addItemToCart(item),
+                        Toast.show({
+                            topOffset: 60,
+                            type: 'success',
+                            text1: `${item.name} added to Cart`,
+                            text2: "Got to Cart to Complete Order"
+                        });
+                    }} />
                 </Right>
             </View>
         </Container>
