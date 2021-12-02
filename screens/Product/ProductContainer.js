@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useState } from "react"
 import { View, StyleSheet, ScrollView, ActivityIndicator, FlatList } from "react-native";
 import { Container, Header, Text, Icon, Input, Item } from "native-base";
+import { useFocusEffect } from "@react-navigation/native";
+
+import baseUrl from "../../assets/common/baseUrl";
+import axios from 'axios';
 
 import ProductList from "./ProductList";
 import SearchedProduct from "./SearchedProducts";
 import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
 
-const data = require('../../assets/data/products.json');
-const productsCategories = require('../../assets/data/categories.json');
-
 const ProductContainer = (props) => {
+
     const [products, setProducts] = useState([]);
     const [productsFiltered, setProductsFiltered] = useState([]);
     const [focus, setFocus] = useState();
@@ -18,26 +20,53 @@ const ProductContainer = (props) => {
     const [productsCtg, setProductsCtg] = useState([]);
     const [active, setActive] = useState();
     const [initialState, setInitialState] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setProducts(data);
-        setProductsFiltered(data);
-        setFocus(false);
-        setCategories(productsCategories);
-        setProductsCtg(data);
-        setActive(-1);
-        setInitialState(data);
+    useFocusEffect((
 
-        return () => {
-            setProducts([])
-            setProductsFiltered([])
-            setFocus()
-            setCategories([]);
-            setProductsCtg([]);
-            setActive();
-            setInitialState();
-        }
-    }, [])
+        useCallback(
+
+            () => {
+                setFocus(false);
+                setActive(-1);
+
+                // get Products
+                axios
+                    .get(`${baseUrl}products`)
+                    .then((res) => {
+                        setProducts(res.data);
+                        setProductsFiltered(res.data);
+                        setProductsCtg(res.data);
+                        setInitialState(res.data);
+                        setLoading(false);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+
+                // get Categories
+                axios
+                    .get(`${baseUrl}categories`)
+                    .then((res) => {
+                        setCategories(res.data);
+                    })
+                    .catch((error) => {
+                        console.log('API Call Error');
+                    });
+
+                return () => {
+                    setProducts([])
+                    setProductsFiltered([])
+                    setFocus()
+                    setCategories([]);
+                    setProductsCtg([]);
+                    setActive();
+                    setInitialState();
+                }
+            },
+            [],
+            )
+        ))
 
     const searchProduct = (text) => {
         setProductsFiltered(
@@ -67,7 +96,9 @@ const ProductContainer = (props) => {
     }
 
     return (
-        <Container>
+        <>
+        {loading == false ? (
+            <Container>
             <Header searchBar rounded>
                 <Item>
                     <Icon name="ios-search"/>
@@ -124,6 +155,13 @@ const ProductContainer = (props) => {
                 
             )}       
         </Container>
+        ) : (
+            // loading
+            <Container style={[styles.center, {backgroundColor: "#f2f2f2"}]}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </Container>
+        )}
+        </>
     );
 }
 
