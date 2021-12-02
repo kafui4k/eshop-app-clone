@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "reactt";
+import React, { useContext, useState, useCallback } from "react";
 import { View, Text, ScrollView, Button, StyleSheet } from "react-native";
 import { Container } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";

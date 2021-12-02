@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "reactt";
+import React, { useEffect, useContext, useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import FormContainer from "../../Shared/Form/FormContainer";
 import Input from "../../Shared/Form/Input";
