@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from "reactt";
+import React, { useEffect, useContext, useState } from "reactt";
 import { View, Text, Button, StyleSheet } from "react-native";
 import FormContainer from "../../Shared/Form/FormContainer";
 import Input from "../../Shared/Form/Input";
 
 import Error from "../../Shared/Error";
 
+// ContextAPI
+import AuthGlobal from "../../Context/store/AuthGlobal";
+import { loginUser } from "../../Context/actions/Auth.actions";
+
 const Login = (props) => {
+
+    const context = useContext(AuthGlobal);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (context.stateUser.isAuthenticated === true) {
+            props.navigation.navigate("User Profile");
+        }
+    }, [context.stateUser.isAuthenticated]);
 
     const handleSubmit = () => {
         const user = {
@@ -20,7 +32,7 @@ const Login = (props) => {
         if (email === "" || password === "") {
             setError("Please fill in all fields");
         } else {
-            console.log('success');
+            loginUser(user, context.dispatch);
         }
     }
 
