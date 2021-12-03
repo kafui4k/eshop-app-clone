@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Text, View } from "react-native";
-import { Item, Picker } from "native-base";
+import { Item, Picker, Toast } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormContainer from "../../../Shared/Form/FormContainer";
 import Input from "../../../Shared/Form/Input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AuthGlobal from "../../../Context/store/AuthGlobal";
 
 import { connect } from "react-redux";
 
 const countries = require("../../../assets/countries.json");
 
 const Checkout = (props) => {
+
+    const context = useContext(AuthGlobal);
 
     const [orderItems, setOrderItems] = useState();
     const [address, setAddress] = useState();
@@ -19,9 +22,24 @@ const Checkout = (props) => {
     const [zip, setZip] = useState();
     const [country, setCountry] = useState();
     const [phone, setPhone] = useState();
+    const [user, setUser] = useState();
 
     useEffect(() => {
+        
         setOrderItems(props.cart.orderItems);
+
+        if (context.stateUser.isAuthenticated) {
+            setUser(context.stateUser.user.sub);
+        } else {
+            props.navigation.navigate("Cart");
+            Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Please login to checkout",
+                text2: "",
+            });
+        }
+
 
         return () => {
             setOrderItems();
@@ -29,6 +47,7 @@ const Checkout = (props) => {
     }, []);
 
     const checkOut = () => {
+
         let order = {
             city,
             country,
@@ -37,6 +56,8 @@ const Checkout = (props) => {
             phone,
             shippingAddress1: address,
             shippingAddress2: address2,
+            status: "3",
+            user,
             zip,
         }
 
