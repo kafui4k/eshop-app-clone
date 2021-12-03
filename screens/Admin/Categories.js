@@ -1,5 +1,13 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import { 
+  View, 
+  Text,
+  FlatList,
+  Dimensions,
+  TextInput,
+  StyleSheet
+} from "react-native";
+import baseUrl from "../../assets/common/baseUrl";
 
 const Categories = (props) => {
   return (
